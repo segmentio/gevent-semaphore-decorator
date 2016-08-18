@@ -1,0 +1,1 @@
+from gevent_semaphore_decorator.decorator import semaphore
