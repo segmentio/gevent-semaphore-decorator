@@ -8,6 +8,6 @@ setup(
         'gevent_semaphore_decorator'
     ],
     install_requires=[
-        'gevent=1.x'
+        'gevent>=1'
     ]
 )
