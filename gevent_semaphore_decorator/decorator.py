@@ -1,6 +1,6 @@
 from functools import wraps
 
-from gevent.coros import BoundedSemaphore
+from gevent.lock import BoundedSemaphore
 
 
 def semaphore(size):
