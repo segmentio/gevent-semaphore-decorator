@@ -4,7 +4,7 @@ import logging
 from gevent.lock import BoundedSemaphore
 
 
-def semaphore(size, timeout=30):
+def semaphore(size, timeout=30, logger=logging.getLogger()):
     sem = BoundedSemaphore(size)
 
     def decorator(func):
@@ -15,14 +15,14 @@ def semaphore(size, timeout=30):
                 acquired = sem.acquire(timeout=timeout)
                 if acquired:
                     try:
-                        logging.info("acquired semaphore: %s, attempts: %s",
+                        logger.info("acquired semaphore: %s, attempts: %s",
                             func, tries)
                         result = func(*args, **kwargs)
                     finally:
                         sem.release()
                     return result
                 tries += 1
-                logging.info("retrying semaphore: %s, attempts: %s",
+                logger.info("retrying semaphore: %s, attempts: %s",
                     func, tries)
 
         return func_wrapper
